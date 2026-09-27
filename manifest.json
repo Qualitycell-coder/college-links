@@ -1,5 +1,5 @@
 {
-  "name": "دليل روابط الكلية الرسمية",
+  "name": "دليل روابط الكلية",
   "short_name": "روابط الكلية",
   "start_url": "./index.html",
   "display": "standalone",
@@ -7,7 +7,7 @@
   "theme_color": "#1e3a8a",
   "icons": [
     {
-      "src": "logo-ar.avif",
+      "src": "./logo ar.avif",
       "sizes": "192x192 512x512",
       "type": "image/avif"
     }

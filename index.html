@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل روابط الكلية الرسمية</title>
-    <!-- استيراد خط Cairo العصري من جوجل -->
+    <!-- استيراد خط Cairo العصري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,7 +15,7 @@
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
         }
         * {
             box-sizing: border-box;
@@ -25,62 +25,58 @@
             background-color: var(--bg-body);
             color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
         .container {
-            max-width: 1000px;
+            max-width: 950px;
             margin: 0 auto;
-            padding: 20px 10px;
         }
+        /* الهيدر مع اللوغو في اليمين تماماً والعنوان في الوسط */
         header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            position: relative;
             background: #ffffff;
-            padding: 20px 25px;
-            border-radius: 16px;
+            padding: 20px 15px;
+            border-radius: 14px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            margin-bottom: 30px;
-            gap: 20px;
+            margin-bottom: 20px;
+            text-align: center;
         }
-        .header-content {
-            text-align: right;
+        .college-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #ffffff;
+            padding: 2px;
+            border: 1px solid var(--border);
         }
-        .header-content h1 {
+        header h1 {
             color: var(--primary);
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
-            margin: 0 0 5px 0;
+            margin: 0 0 4px 0;
         }
-        .header-content p {
+        header p {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             margin: 0;
         }
-        .college-logo {
-            width: 75px;
-            height: 75px;
-            object-fit: contain;
-            border-radius: 12px;
-            background: #ffffff;
-            padding: 4px;
-            border: 1px solid var(--border);
-            flex-shrink: 0;
-        }
         .search-box-wrapper {
-            position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .search-input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 12px 18px;
             font-family: 'Cairo', sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             border: 2px solid var(--border);
-            border-radius: 14px;
+            border-radius: 12px;
             outline: none;
             background: #ffffff;
             box-shadow: var(--shadow);
@@ -88,40 +84,40 @@
         }
         .search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
         }
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 15px;
         }
         .link-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 22px;
+            border-radius: 14px;
+            padding: 18px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.06);
         }
         .link-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             line-height: 1.4;
         }
         .info-badge-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 16px;
         }
         .info-pill {
             display: flex;
@@ -129,14 +125,14 @@
             justify-content: flex-start;
             gap: 10px;
             background: #f1f5f9;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-muted);
         }
         .info-pill span {
-            min-width: 70px;
+            min-width: 65px;
         }
         .info-pill strong {
             color: var(--text-main);
@@ -150,37 +146,33 @@
             background-color: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 8px;
             font-family: 'Cairo', sans-serif;
             font-weight: 700;
-            font-size: 15px;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
         }
         .visit-btn:hover {
             background-color: var(--primary-hover);
-        }
-        .visit-btn:active {
-            transform: scale(0.98);
         }
         .status-msg {
             text-align: center;
             grid-column: 1 / -1;
             color: var(--text-muted);
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            padding: 40px;
+            padding: 30px;
         }
-        @media (max-width: 600px) {
+        /* تحسين التجاوب للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
             header {
-                flex-direction: column-reverse;
-                text-align: center;
+                padding-top: 75px; /* مساحة للوغو في الشاشات الضيقة */
             }
-            .header-content {
-                text-align: center;
-            }
-            header h1 {
-                font-size: 22px;
+            .college-logo {
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%); /* تمركز اللوغو أعلى العنوان في الهواتف الضيقة جداً إذا لزم الأمر، أو يظل يميناً */
             }
         }
     </style>
@@ -189,12 +181,14 @@
 
 <div class="container">
     <header>
-        <div class="header-content">
+        <!-- شعار الكلية في أعلى اليمين تماماً -->
+        <img src="https://eco.univ-setif.dz/images/1/FACULTY.jpg" alt="شعار الكلية" class="college-logo">
+        
+        <!-- عنوان الصفحة في الوسط -->
+        <div>
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
         </div>
-        <!-- شعار الكلية في أعلى اليمين -->
-        <img src="https://eco.univ-setif.dz/images/1/FACULTY.jpg" alt="شعار الكلية" class="college-logo">
     </header>
 
     <!-- شريط البحث الفوري -->
@@ -258,7 +252,7 @@
                 </div>
                 <a href="${url}" target="_blank" class="visit-btn">
                     <span>زيارة الرابط</span>
-                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
             `;
             container.appendChild(card);

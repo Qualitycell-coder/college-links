@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دليل روابط الكلية الرسمية</title>
-    
+
     <!-- ربط ملف الـ Manifest لتفعيل خاصية Add to Home Screen كتطبيق مستقل -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e3a8a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="روابط الكلية">
+    <link rel="apple-touch-icon" href="./logo-ar.avif">
 
     <!-- استيراد خط Cairo العصري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -195,9 +197,9 @@
     <header>
         <!-- شعار الكلية المحلي -->
         <div class="logo-container">
-            <img src="./logo%20ar.avif" alt="شعار الكلية" class="college-logo">
+            <img src="./logo-ar.avif" alt="شعار الكلية" class="college-logo">
         </div>
-        
+
         <!-- عنوان الصفحة والوصف -->
         <div class="header-text">
             <h1>دليل روابط الكلية الرسمية</h1>
@@ -224,10 +226,10 @@
         try {
             let response = await fetch(apiUrl);
             let data = await response.json();
-            
+
             // ترتيب الأحدث فالأحدث تلقائياً
             allLinks = data.reverse();
-            
+
             displayLinks(allLinks);
         } catch (error) {
             document.getElementById('linksContainer').innerHTML = '<div class="status-msg" style="color: #dc2626;">تعذر جلب البيانات، تأكد من الاتصال بالإنترنت.</div>';
@@ -246,7 +248,7 @@
         links.forEach(link => {
             let card = document.createElement('div');
             card.className = 'link-card';
-            
+
             let keys = Object.keys(link);
             let title = link.العنوان || link.Title || link.title || link[keys[0]] || "بدون عنوان";
             let url = link.الرابط || link.URL || link.url || link[keys[1]] || "#";
@@ -293,6 +295,15 @@
     }
 
     window.onload = fetchLinks;
+
+    // تسجيل الـ Service Worker لتفعيل Add to Home Screen والعمل دون اتصال
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker مسجّل بنجاح:', reg.scope))
+                .catch(err => console.error('فشل تسجيل Service Worker:', err));
+        });
+    }
 </script>
 
 </body>

@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a; /* أزرق داكن أكاديمي مستوحى من اللوغو */
+            --primary: #1e3a8a;
             --primary-hover: #1e40af;
             --bg-body: #f8fafc;
             --card-bg: #ffffff;
@@ -31,7 +31,6 @@
             max-width: 950px;
             margin: 0 auto;
         }
-        /* الهيدر المحسّن تماماً لمنع أي تداخل للشعار الشفاف */
         header {
             display: flex;
             align-items: center;
@@ -60,7 +59,6 @@
             font-weight: 600;
             margin: 0;
         }
-        /* ضبط مقاسات الشعار الشفاف بدقة تامة */
         .college-logo-wrapper {
             background: #ffffff;
             padding: 6px 12px;
@@ -175,8 +173,6 @@
             font-weight: 600;
             padding: 30px;
         }
-
-        /* تنسيق الهواتف: فصل الشعار عن العنوان تماماً لمنع التداخل */
         @media (max-width: 600px) {
             header {
                 flex-direction: column;
@@ -201,23 +197,20 @@
 
 <div class="container">
     <header>
-        <!-- عنوان الصفحة والوصف -->
         <div class="header-text">
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
         </div>
-        <!-- إطار مخصص لشعار الكلية الشفاف لضمان وضوحه التام وعدم تداخله -->
         <div class="college-logo-wrapper">
-            <img src="https://jems.univ-setif.dz/_next/image?url=%2Flogo-ar.png&w=384&q=75" alt="شعار الكلية" class="college-logo">
+            <!-- تم تحديث رابط الشعار المباشر هنا -->
+            <img src="https://eco.univ-setif.dz/images/1/FACULTY.jpg" alt="شعار الكلية" class="college-logo">
         </div>
     </header>
 
-    <!-- شريط البحث الفوري -->
     <div class="search-box-wrapper">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو القسم..." onkeyup="filterLinks()">
     </div>
 
-    <!-- شبكة عرض البطاقات -->
     <div class="links-grid" id="linksContainer">
         <div class="status-msg">جاري تحميل الروابط...</div>
     </div>

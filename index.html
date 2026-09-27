@@ -4,11 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دليل روابط الكلية الرسمية</title>
+    
+    <!-- ربط ملف الـ Manifest لتفعيل خاصية Add to Home Screen كتطبيق مستقل -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <!-- استيراد خط Cairo العصري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a; /* أزرق داكن أكاديمي */
+            --primary: #1e3a8a;
             --primary-hover: #1e40af;
             --bg-body: #f8fafc;
             --card-bg: #ffffff;
@@ -26,12 +33,13 @@
             color: var(--text-main);
             margin: 0;
             padding: 15px;
+            /* مساحة آمنة لتفادي تداخل شريط النظام في الهواتف عند التثبيت */
+            padding-top: max(15px, env(safe-area-inset-top));
         }
         .container {
             max-width: 950px;
             margin: 0 auto;
         }
-        /* هيدر مرتب بشكل مستقل لمنع أي تداخل نهائياً */
         header {
             background: #ffffff;
             padding: 20px;
@@ -43,7 +51,7 @@
         }
         .logo-container {
             display: flex;
-            justify-content: flex-start; /* الشعار في اليمين تماماً */
+            justify-content: flex-start;
             margin-bottom: 12px;
         }
         .college-logo {
@@ -54,7 +62,7 @@
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
         }
         .header-text {
-            text-align: center; /* العنوان والوصف في الوسط تماماً */
+            text-align: center;
         }
         header h1 {
             color: var(--primary);
@@ -172,9 +180,6 @@
             header {
                 padding: 15px;
             }
-            .logo-container {
-                justify-content: flex-start;
-            }
             .college-logo {
                 height: 42px;
             }
@@ -188,12 +193,12 @@
 
 <div class="container">
     <header>
-        <!-- شعار الكلية المحلي بدقة تامة -->
+        <!-- شعار الكلية المحلي -->
         <div class="logo-container">
-            <img src="./logo-ar.avif" alt="شعار الكلية" class="college-logo">
+            <img src="./logo%20ar.avif" alt="شعار الكلية" class="college-logo">
         </div>
         
-        <!-- عنوان الصفحة والوصف في الوسط -->
+        <!-- عنوان الصفحة والوصف -->
         <div class="header-text">
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
@@ -220,7 +225,7 @@
             let response = await fetch(apiUrl);
             let data = await response.json();
             
-            // عكس ترتيب البيانات ليعرض الأحدث (الذي يُضاف في نهاية الجدول) في البداية
+            // ترتيب الأحدث فالأحدث تلقائياً
             allLinks = data.reverse();
             
             displayLinks(allLinks);

@@ -11,6 +11,8 @@
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --border-color: #e2e8f0;
+            --badge-bg: #e0f2fe;
+            --badge-color: #0369a1;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,7 +22,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         header {
@@ -31,70 +33,91 @@
             color: var(--primary-color);
             margin-bottom: 10px;
         }
-        .search-box {
-            width: 100%;
+        .controls-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .search-box, .filter-select {
+            flex: 1;
+            min-width: 250px;
             padding: 12px 20px;
-            font-size: 16px;
+            font-size: 15px;
             border: 2px solid var(--border-color);
             border-radius: 8px;
             outline: none;
-            box-sizing: border-box;
-            margin-bottom: 25px;
+            background: white;
             transition: border-color 0.3s;
         }
-        .search-box:focus {
+        .search-box:focus, .filter-select:focus {
             border-color: var(--primary-color);
         }
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
         .link-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
         .link-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+        }
+        .card-header {
+            margin-bottom: 15px;
         }
         .link-title {
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
-            margin-bottom: 10px;
             color: var(--text-color);
+            margin-bottom: 10px;
         }
         .link-meta {
             font-size: 13px;
             color: #64748b;
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .badges-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
         }
         .badge {
             display: inline-block;
-            background: #e0f2fe;
-            color: #0369a1;
-            padding: 2px 8px;
+            background: var(--badge-bg);
+            color: var(--badge-color);
+            padding: 3px 8px;
             border-radius: 4px;
             font-size: 12px;
-            margin-left: 5px;
+            font-weight: 500;
+        }
+        .badge-dept {
+            background: #f1f5f9;
+            color: #475569;
         }
         .visit-btn {
-            display: inline-block;
+            display: block;
             text-align: center;
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 6px;
             font-weight: 500;
             transition: background-color 0.2s;
+            margin-top: 15px;
         }
         .visit-btn:hover {
             background-color: #1d4ed8;
@@ -104,7 +127,7 @@
             grid-column: 1 / -1;
             color: #64748b;
             font-size: 16px;
-            padding: 20px;
+            padding: 30px;
         }
     </style>
 </head>
@@ -113,32 +136,49 @@
 <div class="container">
     <header>
         <h1>دليل روابط الكلية</h1>
-        <p>ابحث عن أي رابط أو خدمة بضغطة زر واحدة (متصل بجدول Google Sheets)</p>
+        <p>منصة مركزية منظمة لخدمات الكلية والأقسام</p>
     </header>
 
-    <!-- شريط البحث الفوري -->
-    <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم الخدمة، مثل: مودل، جدول، برامج..." onkeyup="filterLinks()">
+    <!-- شريط البحث الموحد وقائمة التصفية حسب القسم -->
+    <div class="controls-box">
+        <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
+        <select id="deptFilter" class="filter-select" onchange="filterLinks()">
+            <option value="">جميع الأقسام</option>
+        </select>
+    </div>
 
-    <!-- قائمة الروابط -->
+    <!-- قائمة البطاقات -->
     <div class="links-grid" id="linksContainer">
         <div class="loading">جاري جلب الروابط وتحديثها من الجدول...</div>
     </div>
 </div>
 
 <script>
-    // رابط جدول Google Sheets الخاص بك عبر SheetDB
     const apiUrl = "https://sheetdb.io/api/v1/7wywhx5vd94u1";
-
     let allLinks = [];
 
     async function fetchLinks() {
         try {
             let response = await fetch(apiUrl);
             allLinks = await response.json();
+            populateDepartments(allLinks);
             displayLinks(allLinks);
         } catch (error) {
             document.getElementById('linksContainer').innerHTML = '<div class="loading">خطأ في الاتصال بقاعدة البيانات</div>';
         }
+    }
+
+    // تعبئة قائمة الأقسام تلقائياً بناءً على ما توفره في الجدول
+    function populateDepartments(links) {
+        const deptSelect = document.getElementById('deptFilter');
+        let departments = [...new Set(links.map(link => link.Department || link.department).filter(Boolean))];
+        
+        departments.forEach(dept => {
+            let option = document.createElement('option');
+            option.value = dept;
+            option.textContent = dept;
+            deptSelect.appendChild(option);
+        });
     }
 
     function displayLinks(links) {
@@ -146,7 +186,7 @@
         container.innerHTML = "";
 
         if (!links || links.length === 0) {
-            container.innerHTML = '<div class="loading">لا توجد روابط مضافة حالياً</div>';
+            container.innerHTML = '<div class="loading">لا توجد نتائج مطابقة لبحثك</div>';
             return;
         }
 
@@ -154,19 +194,27 @@
             let card = document.createElement('div');
             card.className = 'link-card';
             
-            // قراءة البيانات من أعمدة جدولك (Title, URL, Category, Target)
+            // مطابقة الأعمدة بدقة مع جدول جوجل (العنوان، الرابط، الفئة، موجه إلى، القسم)
             let title = link.Title || link.title || "";
             let url = link.URL || link.url || "#";
             let category = link.Category || link.category || "عام";
             let target = link.Target || link.target || "الجميع";
+            let department = link.Department || link.department || "عام";
 
             card.setAttribute('data-title', title.toLowerCase());
+            card.setAttribute('data-dept', department.toLowerCase());
             card.setAttribute('data-category', category.toLowerCase());
 
             card.innerHTML = `
-                <div>
+                <div class="card-header">
                     <div class="link-title">${title}</div>
-                    <div class="link-meta"><span class="badge">${category}</span> موجه إلى: ${target}</div>
+                    <div class="link-meta">
+                        <div class="badges-row">
+                            <span class="badge">${category}</span>
+                            <span class="badge badge-dept">القسم: ${department}</span>
+                        </div>
+                        <span>موجّه إلى: <strong>${target}</strong></span>
+                    </div>
                 </div>
                 <a href="${url}" target="_blank" class="visit-btn">زيارة الرابط</a>
             `;
@@ -176,15 +224,22 @@
 
     function filterLinks() {
         let input = document.getElementById('searchInput').value.toLowerCase();
+        let selectedDept = document.getElementById('deptFilter').value.toLowerCase();
+
         let filtered = allLinks.filter(link => {
             let title = (link.Title || link.title || "").toLowerCase();
             let category = (link.Category || link.category || "").toLowerCase();
-            return title.includes(input) || category.includes(input);
+            let dept = (link.Department || link.department || "").toLowerCase();
+
+            let matchesSearch = title.includes(input) || category.includes(input);
+            let matchesDept = selectedDept === "" || dept === selectedDept;
+
+            return matchesSearch && matchesDept;
         });
+
         displayLinks(filtered);
     }
 
-    // جلب البيانات فور فتح الصفحة
     window.onload = fetchLinks;
 </script>
 

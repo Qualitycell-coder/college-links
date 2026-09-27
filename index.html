@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل روابط الكلية الرسمية</title>
+    <!-- ربط ملف الـ PWA Manifest لتحويله لتطبيق هاتفي -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
     <!-- استيراد خط Cairo العصري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a;
+            --primary: #1e3a8a; /* أزرق داكن أكاديمي مستوحى من اللوغو */
             --primary-hover: #1e40af;
             --bg-body: #f8fafc;
             --card-bg: #ffffff;
@@ -31,6 +34,7 @@
             max-width: 950px;
             margin: 0 auto;
         }
+        /* الهيدر المحسّن تماماً لمنع أي تداخل للشعار الشفاف */
         header {
             display: flex;
             align-items: center;
@@ -59,6 +63,7 @@
             font-weight: 600;
             margin: 0;
         }
+        /* ضبط مقاسات الشعار المرفوع محلياً بدقة تامة */
         .college-logo-wrapper {
             background: #ffffff;
             padding: 4px 10px;
@@ -173,6 +178,8 @@
             font-weight: 600;
             padding: 30px;
         }
+
+        /* تنسيق الهواتف: فصل الشعار عن العنوان تماماً لمنع التداخل */
         @media (max-width: 600px) {
             header {
                 flex-direction: column;
@@ -197,20 +204,23 @@
 
 <div class="container">
     <header>
+        <!-- عنوان الصفحة والوصف -->
         <div class="header-text">
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
         </div>
+        <!-- شعار الكلية المرفوع محلياً بصيغة avif -->
         <div class="college-logo-wrapper">
-            <!-- استخدام صورة اللوغو المحلية المرفوعة في المستودع -->
             <img src="logo-ar.avif" alt="شعار الكلية" class="college-logo">
         </div>
     </header>
 
+    <!-- شريط البحث الفوري -->
     <div class="search-box-wrapper">
         <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو القسم..." onkeyup="filterLinks()">
     </div>
 
+    <!-- شبكة عرض البطاقات -->
     <div class="links-grid" id="linksContainer">
         <div class="status-msg">جاري تحميل الروابط...</div>
     </div>
@@ -289,6 +299,13 @@
     }
 
     window.onload = fetchLinks;
+
+    // تسجيل الـ Service Worker لتعمل المنصة كتطبيق هاتفي
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed: ', err));
+        });
+    }
 </script>
 
 </body>

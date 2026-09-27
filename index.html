@@ -33,30 +33,41 @@
             padding: 20px 10px;
         }
         header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 20px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             margin-bottom: 30px;
+            gap: 20px;
+        }
+        .header-content {
+            text-align: right;
+        }
+        .header-content h1 {
+            color: var(--primary);
+            font-size: 26px;
+            font-weight: 900;
+            margin: 0 0 5px 0;
+        }
+        .header-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
         }
         .college-logo {
-            width: 90px;
-            height: 90px;
+            width: 75px;
+            height: 75px;
             object-fit: contain;
-            margin-bottom: 15px;
-            border-radius: 50%;
+            border-radius: 12px;
             background: #ffffff;
-            padding: 5px;
-            box-shadow: var(--shadow);
-            border: 2px solid var(--border);
-        }
-        header h1 {
-            color: var(--primary);
-            font-size: 30px;
-            font-weight: 900;
-            margin-bottom: 6px;
-        }
-        header p {
-            color: var(--text-muted);
-            font-size: 15px;
-            font-weight: 600;
+            padding: 4px;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
         }
         .search-box-wrapper {
             position: relative;
@@ -160,12 +171,16 @@
             font-weight: 600;
             padding: 40px;
         }
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .header-content {
+                text-align: center;
             }
             header h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
         }
     </style>
@@ -174,10 +189,12 @@
 
 <div class="container">
     <header>
-        <!-- 💡 ضع رابط صورة شعار الكلية المباشر داخل الرمز src أدناه -->
-        <img src="https://eco.univ-setif.dz/images/1/FACULTY.jpg" class="college-logo" id="collegeLogo">
-        <h1>دليل روابط الكلية الرسمية</h1>
-        <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
+        <div class="header-content">
+            <h1>دليل روابط الكلية الرسمية</h1>
+            <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
+        </div>
+        <!-- شعار الكلية في أعلى اليمين -->
+        <img src="https://eco.univ-setif.dz/images/1/FACULTY.jpg" alt="شعار الكلية" class="college-logo">
     </header>
 
     <!-- شريط البحث الفوري -->

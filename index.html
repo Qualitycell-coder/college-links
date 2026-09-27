@@ -3,131 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة روابط الكلية</title>
+    <title>منصة روابط الكلية الرسمية</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #f8fafc;
+            --primary: #1d4ed8;
+            --primary-hover: #1e40af;
+            --bg-main: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #1e293b;
-            --border-color: #e2e8f0;
-            --badge-bg: #e0f2fe;
-            --badge-color: #0369a1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --badge-cat: #eff6ff;
+            --badge-cat-text: #1d4ed8;
+            --badge-dept: #f1f5f9;
+            --badge-dept-text: #334155;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-main);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
         }
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         header h1 {
-            color: var(--primary-color);
+            color: var(--primary);
+            font-size: 32px;
             margin-bottom: 10px;
         }
-        .controls-box {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+        header p {
+            color: var(--text-muted);
+            font-size: 16px;
         }
-        .search-box, .filter-select {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 20px;
-            font-size: 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
+        .filters-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        @media (max-width: 768px) {
+            .filters-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        .search-input, .filter-select {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
             outline: none;
             background: white;
-            transition: border-color 0.3s;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        .search-box:focus, .filter-select:focus {
-            border-color: var(--primary-color);
+        .search-input:focus, .filter-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
         }
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
         .link-card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .link-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
         }
-        .card-header {
+        .card-top {
             margin-bottom: 15px;
         }
         .link-title {
-            font-size: 19px;
-            font-weight: bold;
-            color: var(--text-color);
-            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
-        .link-meta {
-            font-size: 13px;
-            color: #64748b;
+        .meta-tags {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .badges-row {
-            display: flex;
-            gap: 6px;
             flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
         }
         .badge {
-            display: inline-block;
-            background: var(--badge-bg);
-            color: var(--badge-color);
-            padding: 3px 8px;
-            border-radius: 4px;
             font-size: 12px;
-            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
         }
-        .badge-dept {
-            background: #f1f5f9;
-            color: #475569;
+        .badge-category {
+            background-color: var(--badge-cat);
+            color: var(--badge-cat-text);
+        }
+        .badge-department {
+            background-color: var(--badge-dept);
+            color: var(--badge-dept-text);
+        }
+        .target-audience {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .target-audience strong {
+            color: var(--text-main);
         }
         .visit-btn {
             display: block;
             text-align: center;
-            background-color: var(--primary-color);
+            background-color: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 6px;
-            font-weight: 500;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
             transition: background-color 0.2s;
-            margin-top: 15px;
         }
         .visit-btn:hover {
-            background-color: #1d4ed8;
+            background-color: var(--primary-hover);
         }
-        .loading {
+        .status-message {
             text-align: center;
             grid-column: 1 / -1;
-            color: #64748b;
-            font-size: 16px;
-            padding: 30px;
+            color: var(--text-muted);
+            font-size: 18px;
+            padding: 40px;
         }
     </style>
 </head>
@@ -135,21 +157,21 @@
 
 <div class="container">
     <header>
-        <h1>دليل روابط الكلية</h1>
-        <p>منصة مركزية منظمة لخدمات الكلية والأقسام</p>
+        <h1>دليل روابط الكلية الرسمية</h1>
+        <p>بوابة مركزية سريعة ومنظمة للوصول إلى كافة خدمات وأقسام الكلية</p>
     </header>
 
-    <!-- شريط البحث الموحد وقائمة التصفية حسب القسم -->
-    <div class="controls-box">
-        <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
+    <!-- أدوات البحث والفلترة -->
+    <div class="filters-section">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
         <select id="deptFilter" class="filter-select" onchange="filterLinks()">
             <option value="">جميع الأقسام</option>
         </select>
     </div>
 
-    <!-- قائمة البطاقات -->
+    <!-- شبكة عرض الروابط -->
     <div class="links-grid" id="linksContainer">
-        <div class="loading">جاري جلب الروابط وتحديثها من الجدول...</div>
+        <div class="status-message">جاري جلب البيانات من جدول الكلية...</div>
     </div>
 </div>
 
@@ -164,14 +186,14 @@
             populateDepartments(allLinks);
             displayLinks(allLinks);
         } catch (error) {
-            document.getElementById('linksContainer').innerHTML = '<div class="loading">خطأ في الاتصال بقاعدة البيانات</div>';
+            document.getElementById('linksContainer').innerHTML = '<div class="status-message" style="color: #dc2626;">تعذر الاتصال بقاعدة البيانات، يرجى المحاولة لاحقاً.</div>';
         }
     }
 
-    // تعبئة قائمة الأقسام تلقائياً بناءً على ما توفره في الجدول
     function populateDepartments(links) {
         const deptSelect = document.getElementById('deptFilter');
-        let departments = [...new Set(links.map(link => link.Department || link.department).filter(Boolean))];
+        // قراءة عمود "القسم" أو بدائله بدقة
+        let departments = [...new Set(links.map(link => link.القسم || link.department || link.Department).filter(Boolean))];
         
         departments.forEach(dept => {
             let option = document.createElement('option');
@@ -186,7 +208,7 @@
         container.innerHTML = "";
 
         if (!links || links.length === 0) {
-            container.innerHTML = '<div class="loading">لا توجد نتائج مطابقة لبحثك</div>';
+            container.innerHTML = '<div class="status-message">لا توجد نتائج مطابقة لبحثك</div>';
             return;
         }
 
@@ -194,29 +216,25 @@
             let card = document.createElement('div');
             card.className = 'link-card';
             
-            // مطابقة الأعمدة بدقة مع جدول جوجل (العنوان، الرابط، الفئة، موجه إلى، القسم)
-            let title = link.Title || link.title || "";
-            let url = link.URL || link.url || "#";
-            let category = link.Category || link.category || "عام";
-            let target = link.Target || link.target || "الجميع";
-            let department = link.Department || link.department || "عام";
-
-            card.setAttribute('data-title', title.toLowerCase());
-            card.setAttribute('data-dept', department.toLowerCase());
-            card.setAttribute('data-category', category.toLowerCase());
+            // مطابقة الأعمدة العربية تماماً كما في جدول Google Sheets الخاص بك
+            let title = link.العنوان || link.Title || link.title || "بدون عنوان";
+            let url = link.الرابط || link.URL || link.url || "#";
+            let category = link.الفئة || link.Category || link.category || "خدمات عامة";
+            let target = link["موجه إلى"] || link.Target || link.target || "الجميع";
+            let department = link.القسم || link.Department || link.department || "عام";
 
             card.innerHTML = `
-                <div class="card-header">
+                <div class="card-top">
                     <div class="link-title">${title}</div>
-                    <div class="link-meta">
-                        <div class="badges-row">
-                            <span class="badge">${category}</span>
-                            <span class="badge badge-dept">القسم: ${department}</span>
-                        </div>
-                        <span>موجّه إلى: <strong>${target}</strong></span>
+                    <div class="meta-tags">
+                        <span class="badge badge-category">${category}</span>
+                        <span class="badge badge-department">${department}</span>
+                    </div>
+                    <div class="target-audience">
+                        <span>موجّه إلى:</span> <strong>${target}</strong>
                     </div>
                 </div>
-                <a href="${url}" target="_blank" class="visit-btn">زيارة الرابط</a>
+                <a href="${url}" target="_blank" class="visit-btn">زيارة الرابط ↗</a>
             `;
             container.appendChild(card);
         });
@@ -227,9 +245,9 @@
         let selectedDept = document.getElementById('deptFilter').value.toLowerCase();
 
         let filtered = allLinks.filter(link => {
-            let title = (link.Title || link.title || "").toLowerCase();
-            let category = (link.Category || link.category || "").toLowerCase();
-            let dept = (link.Department || link.department || "").toLowerCase();
+            let title = (link.العنوان || link.Title || link.title || "").toLowerCase();
+            let category = (link.الفئة || link.Category || link.category || "").toLowerCase();
+            let dept = (link.القسم || link.Department || link.department || "").toLowerCase();
 
             let matchesSearch = title.includes(input) || category.includes(input);
             let matchesDept = selectedDept === "" || dept === selectedDept;

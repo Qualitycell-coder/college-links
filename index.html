@@ -6,24 +6,20 @@
     <title>منصة روابط الكلية الرسمية</title>
     <style>
         :root {
-            --primary: #1d4ed8;
-            --primary-hover: #1e40af;
-            --bg-main: #f8fafc;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f1f5f9;
             --card-bg: #ffffff;
-            --text-main: #0f172a;
+            --text-main: #1e293b;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --badge-cat: #eff6ff;
-            --badge-cat-text: #1d4ed8;
-            --badge-dept: #f1f5f9;
-            --badge-dept-text: #334155;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-main);
+            background-color: var(--bg-body);
             color: var(--text-main);
             margin: 0;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
         .container {
             max-width: 1100px;
@@ -35,38 +31,42 @@
         }
         header h1 {
             color: var(--primary);
-            font-size: 32px;
-            margin-bottom: 10px;
+            font-size: 34px;
+            margin-bottom: 8px;
+            font-weight: 800;
         }
         header p {
             color: var(--text-muted);
             font-size: 16px;
         }
-        .filters-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+        .search-filter-box {
+            display: flex;
             gap: 15px;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
         @media (max-width: 768px) {
-            .filters-section {
-                grid-template-columns: 1fr;
+            .search-filter-box {
+                flex-direction: column;
             }
         }
         .search-input, .filter-select {
-            width: 100%;
-            padding: 14px 18px;
-            font-size: 16px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
             outline: none;
-            background: white;
-            box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #f8fafc;
+            transition: all 0.2s;
         }
         .search-input:focus, .filter-select:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         .links-grid {
             display: grid;
@@ -75,58 +75,40 @@
         }
         .link-card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            padding: 22px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px -3px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
         }
-        .card-top {
+        .card-content {
             margin-bottom: 15px;
         }
         .link-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
             margin-bottom: 12px;
             line-height: 1.4;
         }
-        .meta-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .badge {
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-weight: 600;
-        }
-        .badge-category {
-            background-color: var(--badge-cat);
-            color: var(--badge-cat-text);
-        }
-        .badge-department {
-            background-color: var(--badge-dept);
-            color: var(--badge-dept-text);
-        }
-        .target-audience {
+        .info-row {
             font-size: 14px;
             color: var(--text-muted);
-            margin-bottom: 20px;
+            margin-bottom: 6px;
             display: flex;
-            align-items: center;
-            gap: 6px;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 6px 10px;
+            border-radius: 6px;
         }
-        .target-audience strong {
+        .info-row span strong {
             color: var(--text-main);
         }
         .visit-btn {
@@ -135,7 +117,7 @@
             background-color: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 12px;
+            padding: 10px 15px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 15px;
@@ -144,11 +126,11 @@
         .visit-btn:hover {
             background-color: var(--primary-hover);
         }
-        .status-message {
+        .status-msg {
             text-align: center;
             grid-column: 1 / -1;
             color: var(--text-muted);
-            font-size: 18px;
+            font-size: 16px;
             padding: 40px;
         }
     </style>
@@ -158,20 +140,20 @@
 <div class="container">
     <header>
         <h1>دليل روابط الكلية الرسمية</h1>
-        <p>بوابة مركزية سريعة ومنظمة للوصول إلى كافة خدمات وأقسام الكلية</p>
+        <p>المنصة الرقمية الموحدة لخدمات الكلية والأقسام</p>
     </header>
 
-    <!-- أدوات البحث والفلترة -->
-    <div class="filters-section">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
+    <!-- شريط البحث الموحد والفلترة -->
+    <div class="search-filter-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة..." onkeyup="filterLinks()">
         <select id="deptFilter" class="filter-select" onchange="filterLinks()">
             <option value="">جميع الأقسام</option>
         </select>
     </div>
 
-    <!-- شبكة عرض الروابط -->
+    <!-- شبكة عرض البطاقات -->
     <div class="links-grid" id="linksContainer">
-        <div class="status-message">جاري جلب البيانات من جدول الكلية...</div>
+        <div class="status-msg">جاري تحميل الروابط...</div>
     </div>
 </div>
 
@@ -186,14 +168,13 @@
             populateDepartments(allLinks);
             displayLinks(allLinks);
         } catch (error) {
-            document.getElementById('linksContainer').innerHTML = '<div class="status-message" style="color: #dc2626;">تعذر الاتصال بقاعدة البيانات، يرجى المحاولة لاحقاً.</div>';
+            document.getElementById('linksContainer').innerHTML = '<div class="status-msg" style="color: #dc2626;">تعذر جلب البيانات، تأكد من الاتصال.</div>';
         }
     }
 
     function populateDepartments(links) {
         const deptSelect = document.getElementById('deptFilter');
-        // قراءة عمود "القسم" أو بدائله بدقة
-        let departments = [...new Set(links.map(link => link.القسم || link.department || link.Department).filter(Boolean))];
+        let departments = [...new Set(links.map(link => link.القسم || link.Department || link.department).filter(Boolean))];
         
         departments.forEach(dept => {
             let option = document.createElement('option');
@@ -208,7 +189,7 @@
         container.innerHTML = "";
 
         if (!links || links.length === 0) {
-            container.innerHTML = '<div class="status-message">لا توجد نتائج مطابقة لبحثك</div>';
+            container.innerHTML = '<div class="status-msg">لا توجد نتائج مطابقة لبحثك</div>';
             return;
         }
 
@@ -216,22 +197,31 @@
             let card = document.createElement('div');
             card.className = 'link-card';
             
-            // مطابقة الأعمدة العربية تماماً كما في جدول Google Sheets الخاص بك
-            let title = link.العنوان || link.Title || link.title || "بدون عنوان";
-            let url = link.الرابط || link.URL || link.url || "#";
-            let category = link.الفئة || link.Category || link.category || "خدمات عامة";
-            let target = link["موجه إلى"] || link.Target || link.target || "الجميع";
-            let department = link.القسم || link.Department || link.department || "عام";
+            // قراءة الخانات بمرونة تامة بغض النظر عن حالة الحروف أو لغة الأعمدة
+            let keys = Object.keys(link);
+            let title = link.العنوان || link.Title || link.title || link[keys[0]] || "بدون عنوان";
+            let url = link.الرابط || link.URL || link.url || link[keys[1]] || "#";
+            let category = link.الفئة || link.Category || link.category || link[keys[2]] || "عامة";
+            let target = link["موجه إلى"] || link.Target || link.target || link[keys[3]] || "الجميع";
+            let department = link.القسم || link.Department || link.department || link[keys[4]] || "الكلية";
+
+            // تنظيف الرابط إذا وجد بصيغة نصية
+            if (url.includes('http')) {
+                let match = url.match(/(https?:\/\/[^\s]+)/);
+                if (match) url = match[0].replace(')', '');
+            }
 
             card.innerHTML = `
-                <div class="card-top">
+                <div class="card-content">
                     <div class="link-title">${title}</div>
-                    <div class="meta-tags">
-                        <span class="badge badge-category">${category}</span>
-                        <span class="badge badge-department">${department}</span>
+                    <div class="info-row">
+                        <span>الفئة: <strong>${category}</strong></span>
                     </div>
-                    <div class="target-audience">
-                        <span>موجّه إلى:</span> <strong>${target}</strong>
+                    <div class="info-row">
+                        <span>القسم: <strong>${department}</strong></span>
+                    </div>
+                    <div class="info-row">
+                        <span>موجه إلى: <strong>${target}</strong></span>
                     </div>
                 </div>
                 <a href="${url}" target="_blank" class="visit-btn">زيارة الرابط ↗</a>
@@ -245,11 +235,11 @@
         let selectedDept = document.getElementById('deptFilter').value.toLowerCase();
 
         let filtered = allLinks.filter(link => {
-            let title = (link.العنوان || link.Title || link.title || "").toLowerCase();
-            let category = (link.الفئة || link.Category || link.category || "").toLowerCase();
-            let dept = (link.القسم || link.Department || link.department || "").toLowerCase();
+            let keys = Object.keys(link);
+            let title = (link.العنوان || link.Title || link.title || link[keys[0]] || "").toLowerCase();
+            let dept = (link.القسم || link.Department || link.department || link[keys[4]] || "").toLowerCase();
 
-            let matchesSearch = title.includes(input) || category.includes(input);
+            let matchesSearch = title.includes(input);
             let matchesDept = selectedDept === "" || dept === selectedDept;
 
             return matchesSearch && matchesDept;

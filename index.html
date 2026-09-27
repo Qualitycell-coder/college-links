@@ -3,135 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة روابط الكلية الرسمية</title>
+    <title>دليل روابط الكلية الرسمية</title>
+    <!-- استيراد خط Cairo العصري من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --bg-body: #f1f5f9;
+            --bg-body: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
+            --text-main: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+        }
+        * {
+            box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif;
             background-color: var(--bg-body);
             color: var(--text-main);
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
         }
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 20px 10px;
         }
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         header h1 {
             color: var(--primary);
-            font-size: 34px;
+            font-size: 32px;
+            font-weight: 900;
             margin-bottom: 8px;
-            font-weight: 800;
         }
         header p {
             color: var(--text-muted);
-            font-size: 16px;
-        }
-        .search-filter-box {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-        }
-        @media (max-width: 768px) {
-            .search-filter-box {
-                flex-direction: column;
-            }
-        }
-        .search-input, .filter-select {
-            flex: 1;
-            padding: 12px 16px;
             font-size: 15px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            outline: none;
-            background: #f8fafc;
-            transition: all 0.2s;
+            font-weight: 600;
         }
-        .search-input:focus, .filter-select:focus {
-            border-color: var(--primary);
+        .search-box-wrapper {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            outline: none;
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
         }
         .links-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
         .link-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 22px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
         .link-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08);
-        }
-        .card-content {
-            margin-bottom: 15px;
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
         }
         .link-title {
             font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 12px;
-            line-height: 1.4;
+            margin-bottom: 14px;
+            line-height: 1.5;
         }
-        .info-row {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+        .info-badge-container {
             display: flex;
-            justify-content: space-between;
-            background: #f8fafc;
-            padding: 6px 10px;
-            border-radius: 6px;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
         }
-        .info-row span strong {
+        .info-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .info-pill strong {
             color: var(--text-main);
+            font-weight: 700;
         }
         .visit-btn {
-            display: block;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background-color: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
             font-size: 15px;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s ease, transform 0.1s ease;
         }
         .visit-btn:hover {
             background-color: var(--primary-hover);
+        }
+        .visit-btn:active {
+            transform: scale(0.98);
         }
         .status-msg {
             text-align: center;
             grid-column: 1 / -1;
             color: var(--text-muted);
             font-size: 16px;
+            font-weight: 600;
             padding: 40px;
+        }
+        /* تحسين التجاوب للهواتف الضيقة */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            header h1 {
+                font-size: 26px;
+            }
+            .link-card {
+                padding: 16px;
+            }
         }
     </style>
 </head>
@@ -140,15 +164,12 @@
 <div class="container">
     <header>
         <h1>دليل روابط الكلية الرسمية</h1>
-        <p>المنصة الرقمية الموحدة لخدمات الكلية والأقسام</p>
+        <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
     </header>
 
-    <!-- شريط البحث الموحد والفلترة -->
-    <div class="search-filter-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة..." onkeyup="filterLinks()">
-        <select id="deptFilter" class="filter-select" onchange="filterLinks()">
-            <option value="">جميع الأقسام</option>
-        </select>
+    <!-- شريط البحث الفوري التفاعلي -->
+    <div class="search-box-wrapper">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
     </div>
 
     <!-- شبكة عرض البطاقات -->
@@ -165,26 +186,10 @@
         try {
             let response = await fetch(apiUrl);
             allLinks = await response.json();
-            populateDepartments(allLinks);
             displayLinks(allLinks);
         } catch (error) {
-            document.getElementById('linksContainer').innerHTML = '<div class="status-msg" style="color: #dc2626;">تعذر جلب البيانات، تأكد من الاتصال.</div>';
+            document.getElementById('linksContainer').innerHTML = '<div class="status-msg" style="color: #dc2626;">تعذر جلب البيانات، تأكد من الاتصال بالإنترنت.</div>';
         }
-    }
-
-    function populateDepartments(links) {
-        const deptSelect = document.getElementById('deptFilter');
-        // تفريغ القائمة أولاً لتجنب التكرار
-        deptSelect.innerHTML = '<option value="">جميع الأقسام</option>';
-        
-        let departments = [...new Set(links.map(link => link.القسم || link.Department || link.department).filter(Boolean))];
-        
-        departments.forEach(dept => {
-            let option = document.createElement('option');
-            option.value = dept.trim();
-            option.textContent = dept.trim();
-            deptSelect.appendChild(option);
-        });
     }
 
     function displayLinks(links) {
@@ -213,19 +218,18 @@
             }
 
             card.innerHTML = `
-                <div class="card-content">
+                <div>
                     <div class="link-title">${title}</div>
-                    <div class="info-row">
-                        <span>الفئة: <strong>${category}</strong></span>
-                    </div>
-                    <div class="info-row">
-                        <span>القسم: <strong>${department}</strong></span>
-                    </div>
-                    <div class="info-row">
-                        <span>موجه إلى: <strong>${target}</strong></span>
+                    <div class="info-badge-container">
+                        <div class="info-pill"><span>الفئة</span> <strong>${category}</strong></div>
+                        <div class="info-pill"><span>القسم</span> <strong>${department}</strong></div>
+                        <div class="info-pill"><span>المستهدف</span> <strong>${target}</strong></div>
                     </div>
                 </div>
-                <a href="${url}" target="_blank" class="visit-btn">زيارة الرابط ↗</a>
+                <a href="${url}" target="_blank" class="visit-btn">
+                    <span>زيارة الرابط</span>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
             `;
             container.appendChild(card);
         });
@@ -233,17 +237,14 @@
 
     function filterLinks() {
         let input = document.getElementById('searchInput').value.toLowerCase().trim();
-        let selectedDept = document.getElementById('deptFilter').value.trim();
 
         let filtered = allLinks.filter(link => {
             let keys = Object.keys(link);
             let title = (link.العنوان || link.Title || link.title || link[keys[0]] || "").toLowerCase();
-            let dept = (link.القسم || link.Department || link.department || link[keys[4]] || "").trim();
+            let category = (link.الفئة || link.Category || link.category || link[keys[2]] || "").toLowerCase();
+            let department = (link.القسم || link.Department || link.department || link[keys[4]] || "").toLowerCase();
 
-            let matchesSearch = title.includes(input);
-            let matchesDept = selectedDept === "" || dept === selectedDept;
-
-            return matchesSearch && matchesDept;
+            return title.includes(input) || category.includes(input) || department.includes(input);
         });
 
         displayLinks(filtered);

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة روابط الكلية</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 25px;
+            transition: border-color 0.3s;
+        }
+        .search-box:focus {
+            border-color: var(--primary-color);
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .link-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .link-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        .link-meta {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        .badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        .visit-btn {
+            display: inline-block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .visit-btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>دليل روابط الكلية</h1>
+        <p>ابحث عن أي رابط أو خدمة بضغطة زر واحدة</p>
+    </header>
+
+    <!-- شريط البحث الفوري -->
+    <input type="text" id="searchInput" class="search-box" placeholder="ابحث عن اسم الخدمة، مثل: مودل، جدول، برامج..." onkeyup="filterLinks()">
+
+    <!-- قائمة الروابط -->
+    <div class="links-grid" id="linksContainer"></div>
+</div>
+
+<script>
+    // قائمة الروابط (يمكنك تعديلها بسهولة هنا وقتما تشاء)
+    const allLinks = [
+        { title: "المنصة البيداغوجية Moodle", url: "https://moodle.univ.dz", category: "البيداغوجيا", target: "الجميع" },
+        { title: "جدول الامتحانات السداسي الأول", url: "https://drive.google.com", category: "شؤون الطلاب", target: "الطلبة" },
+        { title: "البريد المهني للأساتذة", url: "https://mail.google.com", category: "الإدارة", target: "الأساتذة" },
+        { title: "برامج التدريب", url: "https://eco.univ-setif.dz/altdrJ/jdwi-ast-mal-alzmn", category: "البيداغوجيا", target: "الجميع" }
+    ];
+
+    function displayLinks(links) {
+        const container = document.getElementById('linksContainer');
+        container.innerHTML = "";
+
+        if (links.length === 0) {
+            container.innerHTML = '<div style="text-align: center; grid-column: 1 / -1; color: #64748b; padding: 20px;">لا توجد نتائج مطابقة لبحثك</div>';
+            return;
+        }
+
+        links.forEach(link => {
+            let card = document.createElement('div');
+            card.className = 'link-card';
+            card.setAttribute('data-title', link.title.toLowerCase());
+            card.setAttribute('data-category', link.category.toLowerCase());
+
+            card.innerHTML = `
+                <div>
+                    <div class="link-title">${link.title}</div>
+                    <div class="link-meta"><span class="badge">${link.category}</span> موجه إلى: ${link.target}</div>
+                </div>
+                <a href="${link.url}" target="_blank" class="visit-btn">زيارة الرابط</a>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function filterLinks() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let filtered = allLinks.filter(link => 
+            link.title.toLowerCase().includes(input) || 
+            link.category.toLowerCase().includes(input)
+        );
+        displayLinks(filtered);
+    }
+
+    window.onload = function() {
+        displayLinks(allLinks);
+    };
+</script>
+
+</body>
+</html>

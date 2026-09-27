@@ -1,15 +1,27 @@
 {
-  "name": "دليل روابط الكلية",
+  "name": "دليل روابط الكلية الرسمية",
   "short_name": "روابط الكلية",
+  "description": "بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
   "background_color": "#f8fafc",
   "theme_color": "#1e3a8a",
   "icons": [
     {
-      "src": "./logo ar.avif",
-      "sizes": "192x192 512x512",
-      "type": "image/avif"
+      "src": "./logo-ar.avif",
+      "sizes": "192x192",
+      "type": "image/avif",
+      "purpose": "any"
+    },
+    {
+      "src": "./logo-ar.avif",
+      "sizes": "512x512",
+      "type": "image/avif",
+      "purpose": "any"
     }
   ]
 }

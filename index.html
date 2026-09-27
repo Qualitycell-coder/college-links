@@ -10,7 +10,6 @@
         :root {
             --primary: #1e3a8a; /* أزرق داكن أكاديمي مستوحى من اللوغو */
             --primary-hover: #1e40af;
-            --accent: #3b82f6;
             --bg-body: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
@@ -32,26 +31,26 @@
             max-width: 950px;
             margin: 0 auto;
         }
-        /* الهيدر الجديد المتجاوب تماماً بدون تداخل */
+        /* الهيدر المحسّن تماماً لمنع أي تداخل للشعار الشفاف */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #ffffff;
-            padding: 20px;
+            padding: 20px 24px;
             border-radius: 14px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             margin-bottom: 20px;
-            gap: 15px;
-            text-align: right;
+            gap: 20px;
         }
         .header-text {
             flex: 1;
+            text-align: right;
         }
         header h1 {
             color: var(--primary);
-            font-size: 23px;
+            font-size: 22px;
             font-weight: 900;
             margin: 0 0 4px 0;
         }
@@ -61,12 +60,22 @@
             font-weight: 600;
             margin: 0;
         }
+        /* ضبط مقاسات الشعار الشفاف بدقة تامة */
+        .college-logo-wrapper {
+            background: #ffffff;
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
         .college-logo {
-            height: 65px;
+            height: 50px;
+            max-width: 140px;
             width: auto;
             object-fit: contain;
-            flex-shrink: 0;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
         }
         .search-box-wrapper {
             margin-bottom: 20px;
@@ -167,21 +176,23 @@
             padding: 30px;
         }
 
-        /* تنسيق خاص للشاشات الصغيرة والهواتف لمنع أي تداخل نهائياً */
+        /* تنسيق الهواتف: فصل الشعار عن العنوان تماماً لمنع التداخل */
         @media (max-width: 600px) {
             header {
-                flex-direction: column-reverse;
+                flex-direction: column;
                 text-align: center;
+                padding: 15px;
             }
             .header-text {
                 text-align: center;
+                order: 2;
             }
-            .college-logo {
-                height: 60px;
+            .college-logo-wrapper {
+                order: 1;
                 margin-bottom: 5px;
             }
             header h1 {
-                font-size: 21px;
+                font-size: 20px;
             }
         }
     </style>
@@ -195,8 +206,10 @@
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
         </div>
-        <!-- شعار الكلية الواضح -->
-        <img src="https://jems.univ-setif.dz/_next/image?url=%2Flogo-dark-ar1.png&w=640&q=75" alt="شعار الكلية" class="college-logo">
+        <!-- إطار مخصص لشعار الكلية الشفاف لضمان وضوحه التام وعدم تداخله -->
+        <div class="college-logo-wrapper">
+            <img src="https://jems.univ-setif.dz/_next/image?url=%2Flogo-dark-ar1.png&w=640&q=75" alt="شعار الكلية" class="college-logo">
+        </div>
     </header>
 
     <!-- شريط البحث الفوري -->

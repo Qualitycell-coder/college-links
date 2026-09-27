@@ -2,16 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دليل روابط الكلية الرسمية</title>
-    <!-- ربط ملف الـ PWA Manifest لتحويله لتطبيق هاتفي -->
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1e3a8a">
     <!-- استيراد خط Cairo العصري -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a; /* أزرق داكن أكاديمي مستوحى من اللوغو */
+            --primary: #1e3a8a; /* أزرق داكن أكاديمي */
             --primary-hover: #1e40af;
             --bg-body: #f8fafc;
             --card-bg: #ffffff;
@@ -34,51 +31,43 @@
             max-width: 950px;
             margin: 0 auto;
         }
-        /* الهيدر المحسّن تماماً لمنع أي تداخل للشعار الشفاف */
+        /* هيدر متكيف تماماً مع وضع الشاشة الرئيسية للهاتف */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #ffffff;
-            padding: 20px 24px;
+            padding: 18px 20px;
             border-radius: 14px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             margin-bottom: 20px;
-            gap: 20px;
+            gap: 15px;
         }
         .header-text {
-            flex: 1;
             text-align: right;
+            flex-grow: 1;
         }
         header h1 {
             color: var(--primary);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 900;
             margin: 0 0 4px 0;
+            line-height: 1.3;
         }
         header p {
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             margin: 0;
         }
-        /* ضبط مقاسات الشعار المرفوع محلياً بدقة تامة */
-        .college-logo-wrapper {
-            background: #ffffff;
-            padding: 4px 10px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
         .college-logo {
-            height: 50px;
-            max-width: 140px;
+            height: 55px;
             width: auto;
+            max-width: 110px;
             object-fit: contain;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
         }
         .search-box-wrapper {
             margin-bottom: 20px;
@@ -179,23 +168,26 @@
             padding: 30px;
         }
 
-        /* تنسيق الهواتف: فصل الشعار عن العنوان تماماً لمنع التداخل */
+        /* تعديل خاص للهواتف لضمان عدم حدوث أي تداخل نهائياً حتى عند فتح التطبيق من الشاشة الرئيسية */
         @media (max-width: 600px) {
+            body {
+                padding-top: env(safe-area-inset-top, 15px);
+            }
             header {
                 flex-direction: column;
                 text-align: center;
                 padding: 15px;
+                gap: 12px;
             }
             .header-text {
                 text-align: center;
-                order: 2;
             }
-            .college-logo-wrapper {
-                order: 1;
-                margin-bottom: 5px;
+            .college-logo {
+                height: 52px;
+                order: -1; /* جعل اللوغو يظهر في الأعلى تماماً وتحته العنوان في الهواتف */
             }
             header h1 {
-                font-size: 20px;
+                font-size: 19px;
             }
         }
     </style>
@@ -204,14 +196,13 @@
 
 <div class="container">
     <header>
+        <!-- شعار الكلية الواضح في الأعلى تماماً على الهاتف -->
+        <img src="https://jems.univ-setif.dz/_next/image?url=%2Flogo-dark-ar1.png&w=640&q=75" alt="شعار الكلية" class="college-logo">
+        
         <!-- عنوان الصفحة والوصف -->
         <div class="header-text">
             <h1>دليل روابط الكلية الرسمية</h1>
             <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
-        </div>
-        <!-- شعار الكلية المرفوع محلياً بصيغة avif -->
-        <div class="college-logo-wrapper">
-            <img src="logo-ar.avif" alt="شعار الكلية" class="college-logo">
         </div>
     </header>
 
@@ -299,13 +290,6 @@
     }
 
     window.onload = fetchLinks;
-
-    // تسجيل الـ Service Worker لتعمل المنصة كتطبيق هاتفي
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW registration failed: ', err));
-        });
-    }
 </script>
 
 </body>

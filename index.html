@@ -190,7 +190,7 @@
     <header>
         <!-- شعار الكلية المحلي بدقة تامة -->
         <div class="logo-container">
-            <img src="./logo-ar.avif" alt="شعار الكلية" class="college-logo">
+            <img src="./logo%20ar.avif" alt="شعار الكلية" class="college-logo">
         </div>
         
         <!-- عنوان الصفحة والوصف في الوسط -->
@@ -218,7 +218,11 @@
     async function fetchLinks() {
         try {
             let response = await fetch(apiUrl);
-            allLinks = await response.json();
+            let data = await response.json();
+            
+            // عكس ترتيب البيانات ليعرض الأحدث (الذي يُضاف في نهاية الجدول) في البداية
+            allLinks = data.reverse();
+            
             displayLinks(allLinks);
         } catch (error) {
             document.getElementById('linksContainer').innerHTML = '<div class="status-msg" style="color: #dc2626;">تعذر جلب البيانات، تأكد من الاتصال بالإنترنت.</div>';

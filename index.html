@@ -34,13 +34,24 @@
         }
         header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+        }
+        .college-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            border-radius: 50%;
+            background: #ffffff;
+            padding: 5px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border);
         }
         header h1 {
             color: var(--primary);
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         header p {
             color: var(--text-muted);
@@ -92,8 +103,8 @@
             font-size: 18px;
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 14px;
-            line-height: 1.5;
+            margin-bottom: 16px;
+            line-height: 1.4;
         }
         .info-badge-container {
             display: flex;
@@ -102,15 +113,19 @@
             margin-bottom: 20px;
         }
         .info-pill {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
+            gap: 10px;
             background: #f1f5f9;
-            padding: 6px 12px;
+            padding: 8px 12px;
             border-radius: 8px;
             font-size: 13px;
             font-weight: 600;
             color: var(--text-muted);
+        }
+        .info-pill span {
+            min-width: 70px;
         }
         .info-pill strong {
             color: var(--text-main);
@@ -145,16 +160,12 @@
             font-weight: 600;
             padding: 40px;
         }
-        /* تحسين التجاوب للهواتف الضيقة */
         @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
             header h1 {
-                font-size: 26px;
-            }
-            .link-card {
-                padding: 16px;
+                font-size: 24px;
             }
         }
     </style>
@@ -163,13 +174,15 @@
 
 <div class="container">
     <header>
+        <!-- 💡 ضع رابط صورة شعار الكلية المباشر داخل الرمز src أدناه -->
+        <img src="https://via.placeholder.com/90" alt="شعار الكلية" class="college-logo" id="collegeLogo">
         <h1>دليل روابط الكلية الرسمية</h1>
         <p>بوابة رقمية تفاعلية للوصول السريع إلى خدمات الكلية والأقسام</p>
     </header>
 
-    <!-- شريط البحث الفوري التفاعلي -->
+    <!-- شريط البحث الفوري -->
     <div class="search-box-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو الرابط..." onkeyup="filterLinks()">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن اسم الخدمة أو القسم..." onkeyup="filterLinks()">
     </div>
 
     <!-- شبكة عرض البطاقات -->
@@ -221,9 +234,9 @@
                 <div>
                     <div class="link-title">${title}</div>
                     <div class="info-badge-container">
-                        <div class="info-pill"><span>الفئة</span> <strong>${category}</strong></div>
-                        <div class="info-pill"><span>القسم</span> <strong>${department}</strong></div>
-                        <div class="info-pill"><span>المستهدف</span> <strong>${target}</strong></div>
+                        <div class="info-pill"><span>الفئة:</span> <strong>${category}</strong></div>
+                        <div class="info-pill"><span>القسم:</span> <strong>${department}</strong></div>
+                        <div class="info-pill"><span>المستهدف:</span> <strong>${target}</strong></div>
                     </div>
                 </div>
                 <a href="${url}" target="_blank" class="visit-btn">

@@ -174,12 +174,15 @@
 
     function populateDepartments(links) {
         const deptSelect = document.getElementById('deptFilter');
+        // تفريغ القائمة أولاً لتجنب التكرار
+        deptSelect.innerHTML = '<option value="">جميع الأقسام</option>';
+        
         let departments = [...new Set(links.map(link => link.القسم || link.Department || link.department).filter(Boolean))];
         
         departments.forEach(dept => {
             let option = document.createElement('option');
-            option.value = dept;
-            option.textContent = dept;
+            option.value = dept.trim();
+            option.textContent = dept.trim();
             deptSelect.appendChild(option);
         });
     }
@@ -197,7 +200,6 @@
             let card = document.createElement('div');
             card.className = 'link-card';
             
-            // قراءة الخانات بمرونة تامة بغض النظر عن حالة الحروف أو لغة الأعمدة
             let keys = Object.keys(link);
             let title = link.العنوان || link.Title || link.title || link[keys[0]] || "بدون عنوان";
             let url = link.الرابط || link.URL || link.url || link[keys[1]] || "#";
@@ -205,7 +207,6 @@
             let target = link["موجه إلى"] || link.Target || link.target || link[keys[3]] || "الجميع";
             let department = link.القسم || link.Department || link.department || link[keys[4]] || "الكلية";
 
-            // تنظيف الرابط إذا وجد بصيغة نصية
             if (url.includes('http')) {
                 let match = url.match(/(https?:\/\/[^\s]+)/);
                 if (match) url = match[0].replace(')', '');
@@ -231,13 +232,13 @@
     }
 
     function filterLinks() {
-        let input = document.getElementById('searchInput').value.toLowerCase();
-        let selectedDept = document.getElementById('deptFilter').value.toLowerCase();
+        let input = document.getElementById('searchInput').value.toLowerCase().trim();
+        let selectedDept = document.getElementById('deptFilter').value.trim();
 
         let filtered = allLinks.filter(link => {
             let keys = Object.keys(link);
             let title = (link.العنوان || link.Title || link.title || link[keys[0]] || "").toLowerCase();
-            let dept = (link.القسم || link.Department || link.department || link[keys[4]] || "").toLowerCase();
+            let dept = (link.القسم || link.Department || link.department || link[keys[4]] || "").trim();
 
             let matchesSearch = title.includes(input);
             let matchesDept = selectedDept === "" || dept === selectedDept;

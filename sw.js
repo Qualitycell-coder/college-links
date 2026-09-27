@@ -3,7 +3,7 @@ const urlsToCache = [
     './',
     './index.html',
     './manifest.json',
-    './logo-ar.avif'
+    './logo-ar.png'
 ];
 
 // عند التثبيت: تخزين الملفات الأساسية في الذاكرة المؤقتة

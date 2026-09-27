@@ -1,0 +1,15 @@
+{
+  "name": "دليل روابط الكلية الرسمية",
+  "short_name": "روابط الكلية",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "logo-ar.avif",
+      "sizes": "192x192 512x512",
+      "type": "image/avif"
+    }
+  ]
+}

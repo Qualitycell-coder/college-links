@@ -31,7 +31,7 @@
             max-width: 950px;
             margin: 0 auto;
         }
-        /* هيدر مرتب بشكل قطعي لمنع التداخل */
+        /* هيدر مرتب بشكل مستقل لمنع أي تداخل نهائياً */
         header {
             background: #ffffff;
             padding: 20px;
@@ -49,7 +49,7 @@
         .college-logo {
             height: 50px;
             width: auto;
-            max-width: 130px;
+            max-width: 150px;
             object-fit: contain;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
         }
@@ -173,7 +173,7 @@
                 padding: 15px;
             }
             .logo-container {
-                justify-content: flex-start; /* ضمان بقاء اللوغو في اليمين تماماً على الهاتف */
+                justify-content: flex-start;
             }
             .college-logo {
                 height: 42px;
@@ -188,9 +188,9 @@
 
 <div class="container">
     <header>
-        <!-- شعار الكلية في أعلى اليمين بشكل مستقل تماماً ومنعزل عن العنوان -->
+        <!-- شعار الكلية بصيغة PNG واضحة ومدعومة بالكامل -->
         <div class="logo-container">
-            <img src="https://jems.univ-setif.dz/_next/image?url=%2Flogo-dark-ar1.png&w=640&q=75" alt="شعار الكلية" class="college-logo">
+            <img src="https://jems.univ-setif.dz/logo-ar.png" alt="شعار الكلية" class="college-logo">
         </div>
         
         <!-- عنوان الصفحة والوصف في الوسط -->
